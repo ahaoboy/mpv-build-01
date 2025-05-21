@@ -19,9 +19,10 @@ jobs:
       - name: build
         run: |
           curl -L -o mpv-uosc.zip https://github.com/mpv-easy/mpv-easy/releases/latest/download/mpv-uosc-windows-full.zip
-          rm -rf mpv-uosc.zip
 
           unzip mpv-uosc.zip -d mpv-uosc
+
+          rm -rf mpv-uosc.zip
 
           cp autosave.lua mpv-uosc/portable_config/scripts/autosave.lua
           cd mpv-uosc
