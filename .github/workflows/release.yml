@@ -18,6 +18,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: build
         run: |
+          sudo apt-get install tree -y
           curl -L -o mpv-uosc.zip https://github.com/mpv-easy/mpv-easy/releases/latest/download/mpv-uosc-windows-full.zip
 
           unzip mpv-uosc.zip -d mpv-uosc
@@ -25,9 +26,15 @@ jobs:
           rm -rf mpv-uosc.zip
 
           cp autosave.lua mpv-uosc/portable_config/scripts/autosave.lua
+
+          curl -L -o auto-save-state.lua https://github.com/AN3223/dotfiles/raw/refs/heads/master/.config/mpv/scripts/auto-save-state.lua
+          cp auto-save-state.lua mpv-uosc/portable_config/scripts/auto-save-state.lua
+
           cd mpv-uosc
 
           zip -r -q ../mpv-uosc.zip .
+
+          tree ./portable_config
 
       - name: release
         uses: ncipollo/release-action@v1
